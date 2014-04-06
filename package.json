@@ -3,12 +3,12 @@
   "main": "./lib/minimap-color-highlight",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "activationEvents": ["minimap-color-highlight:toggle"],
   "repository": "https://github.com/atom/minimap-color-highlight",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
   "dependencies": {
+    "emissary": "1.x"
   }
 }

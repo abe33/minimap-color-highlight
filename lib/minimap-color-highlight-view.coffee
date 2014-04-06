@@ -1,24 +1,36 @@
-{View} = require 'atom'
+{$, EditorView} = require 'atom'
 
-module.exports =
-class MinimapColorHighlightView extends View
-  @content: ->
-    @div class: 'minimap-color-highlight overlay from-top', =>
-      @div "The MinimapColorHighlight package is Alive! It's ALIVE!", class: "message"
+# HACK The exports is a function here because we are not sure that the
+# `find-and-replace` and `minimap` packages will be available when this
+# file is loaded. The binding instance will evaluate the module when
+# created because at that point we're sure that both modules have been
+# loaded.
+module.exports = ->
+  colorHighlight = atom.packages.getLoadedPackage('atom-color-highlight')
+  minimap = atom.packages.getLoadedPackage('minimap')
 
-  initialize: (serializeState) ->
-    atom.workspaceView.command "minimap-color-highlight:toggle", => @toggle()
+  minimapInstance = require (minimap.path)
+  AtomColorHighlightView = require (colorHighlight.path + '/lib/atom-color-highlight-view')
 
-  # Returns an object that can be retrieved when package is activated
-  serialize: ->
+  class MinimapColorHighlighView extends AtomColorHighlightView
+    attach: ->
+      minimap = @getMinimap()
 
-  # Tear down any state and detach
-  destroy: ->
-    @detach()
+      if minimap?
+        minimap.miniOverlayer.append(this)
+        @adjustResults()
 
-  toggle: ->
-    console.log "MinimapColorHighlightView was toggled!"
-    if @hasParent()
-      @detach()
-    else
-      atom.workspaceView.append(this)
+    # As there's a slightly different char width between the minimap font
+    # and the editor font we'll retrieve both widths and compute the
+    # ratio to properly scale the find results.
+    # FIXME I can't wrap my head on why the fixed version of redacted
+    # still returns different widths for chars, so during that time
+    # I'll use fixed scale.
+    adjustResults: ->
+      return if @adjusted
+      @css '-webkit-transform', "scale3d(0.69,1,1)"
+      @adjusted = true
+
+    getMinimap: ->
+      if @editorView instanceof EditorView
+        return minimapInstance.minimapForEditorView(@editorView)
