@@ -25,25 +25,36 @@ class MinimapColorHighlight
     @minimap = null
 
   activatePlugin: ->
-    if @minimap.active
-      @createViews()
-    else
-      @subscribe @minimap, 'activated', @createViews
+    return if @active
 
+    @active = true
+
+    @createViews() if @minimap.active
+
+    @subscribe @minimap, 'activated', @createViews
     @subscribe @minimap, 'deactivated', @destroyViews
 
   deactivatePlugin: ->
+    return unless @active
+
+    @active = false
     @destroyViews()
     @unsubscribe()
 
   createViews: =>
-    atom.workspaceView.eachEditorView (editor) =>
-      model = @colorHighlight.modelForEditorView(editor)
-      view = new @MinimapColorHighlightView model, editor
-      @views[editor.getModel().id] = view
-      view.attach()
+    return if @viewsCreated
 
-  destroyViews: ->
+    @viewsCreated = true
+    @paneSubscription = atom.workspaceView.eachPaneView (pane) =>
+      view = new @MinimapColorHighlightView pane
+
+      @views[pane.model.id] = view
+
+  destroyViews: =>
+    return unless @viewsCreated
+
+    @paneSubscription.off()
+    @viewsCreated = false
     view.destroy() for id,view of @views
     @views = {}
 
