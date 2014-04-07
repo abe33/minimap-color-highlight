@@ -53,8 +53,8 @@ module.exports = ->
     # I'll use fixed scale.
     adjustResults: ->
       return if @adjusted
-      @css '-webkit-transform', "scale3d(0.69,1,1)"
       @adjusted = true
+      @css '-webkit-transform', "scale3d(#{minimap.getCharWidthRatio()},1,1)"
 
     getEditor: -> @paneView.activeView
     getMinimap: ->
