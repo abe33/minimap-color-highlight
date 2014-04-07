@@ -71,7 +71,7 @@ module.exports = ->
         return minimap.minimapForEditorView(@editorView)
 
     setEditorView: (editorView) ->
-      return console.log(new Error().stack) if typeof editorView is 'function'
+      return if typeof editorView is 'function'
       @detach() if @getMinimap()?
       @editorView = editorView
       {@editor} = @editorView
