@@ -47,6 +47,7 @@ class MinimapColorHighlight
     @viewsCreated = true
     @paneSubscription = @colorHighlight.eachColorHighlightEditor (editor) =>
       pane = editor.editorView.getPane()
+      return unless pane?
       view = new @MinimapColorHighlightView pane
 
       @views[pane.model.id] = view
