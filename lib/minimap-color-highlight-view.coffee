@@ -42,7 +42,9 @@ module.exports = ->
       minimapView = @getMinimap()
 
       if minimapView?
-        minimapView.miniOverlayer.append(this)
+        minimapIsAppended = minimapView.miniOverlayer.find('.atom-color-highlight').length is 1
+
+        minimapView.miniOverlayer.append(this) unless minimapIsAppended
         @adjustResults()
 
     # As there's a slightly different char width between the minimap font
