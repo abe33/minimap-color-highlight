@@ -61,8 +61,6 @@ module.exports = ->
     # still returns different widths for chars, so during that time
     # I'll use fixed scale.
     adjustResults: ->
-      return if @adjusted
-      @adjusted = true
       @css '-webkit-transform', "scale3d(#{minimap.getCharWidthRatio()},1,1)"
 
     getEditor: -> @paneView.activeView
