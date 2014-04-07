@@ -45,7 +45,8 @@ class MinimapColorHighlight
     return if @viewsCreated
 
     @viewsCreated = true
-    @paneSubscription = atom.workspaceView.eachPaneView (pane) =>
+    @paneSubscription = @colorHighlight.eachColorHighlightEditor (editor) =>
+      pane = editor.editorView.getPane()
       view = new @MinimapColorHighlightView pane
 
       @views[pane.model.id] = view
