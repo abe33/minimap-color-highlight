@@ -22,7 +22,14 @@ module.exports = ->
 
       super(model, editorView)
 
-      @markersUpdated(model.markers)
+      @markersUpdated(model.markers) if model?
+
+    destroy: ->
+      @unsubscribe()
+      @paneView = null
+      @activeItem = null
+      @destroyAllViews()
+      @getMinimap()?.find('.atom-color-highlight').remove()
 
     onActiveItemChanged: (item) =>
       return if item is @activeItem
