@@ -24,6 +24,7 @@ class MinimapColorHighlight
     @colorHighlight = null
     @minimap = null
 
+  isActive: -> @active
   activatePlugin: ->
     return if @active
 
