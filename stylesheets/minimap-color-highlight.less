@@ -4,8 +4,12 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
-.minimap .atom-color-highlight .color-highlight {
-  color: rgba(0,0,0,0) !important;
-  z-index: 0;
-  white-space: nowrap;
+.minimap .atom-color-highlight {
+  -webkit-transform-origin: top left;
+  
+  .color-highlight {
+    color: rgba(0,0,0,0) !important;
+    z-index: 0;
+    white-space: nowrap;
+  }
 }
