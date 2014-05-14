@@ -79,3 +79,13 @@ module.exports = ->
 
 
     activeTabSupportMinimap: -> @getEditor()
+
+    # HACK We don't want the markers to disappear when they're not
+    # visible in the editor visible area so we'll hook on the
+    # `markersUpdated` method and replace the corresponding method
+    # on the fly.
+    markersUpdated: (markers) ->
+      super(markers)
+      for k,marker of @markerViews
+        marker.intersectsRenderedScreenRows = -> true
+        marker.updateDisplay()
