@@ -86,6 +86,8 @@ module.exports = ->
     # on the fly.
     markersUpdated: (markers) ->
       super(markers)
+      mini = @getMinimap()
       for k,marker of @markerViews
-        marker.intersectsRenderedScreenRows = -> true
+        marker.intersectsRenderedScreenRows = (range) ->
+          range.intersectsRowRange(mini.miniEditorView.firstRenderedScreenRow, mini.miniEditorView.lastRenderedScreenRow)
         marker.updateDisplay()
