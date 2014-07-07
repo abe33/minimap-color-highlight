@@ -36,7 +36,7 @@ module.exports = ->
       @activeItem = item
 
       editorView = @getEditor()
-      return unless editorView.hasClass('editor')
+      return unless editorView?.hasClass('editor')
       model = colorHighlight.modelForEditorView(editorView)
 
       @setEditorView(editorView)
