@@ -1,4 +1,4 @@
-{$, EditorView} = require 'atom'
+{$} = require 'atom'
 
 # HACK The exports is a function here because we are not sure that the
 # `atom-color-highlight` and `minimap` packages will be available when this
@@ -36,7 +36,7 @@ module.exports = ->
       @activeItem = item
 
       editorView = @getEditor()
-      return unless editorView instanceof EditorView
+      return unless editorView.hasClass('editor')
       model = colorHighlight.modelForEditorView(editorView)
 
       @setEditorView(editorView)
@@ -65,7 +65,7 @@ module.exports = ->
 
     getEditor: -> @paneView.activeView
     getMinimap: ->
-      if @editorView instanceof EditorView
+      if @editorView?.hasClass('editor')
         return minimap.minimapForEditorView(@editorView)
 
     setEditorView: (editorView) ->
