@@ -1,3 +1,10 @@
+<a name="v0.3.3"></a>
+# v0.3.3 (2014-07-10)
+
+## :bug: Bug Fixes
+
+- Fix bad test for model existence ([911c6fff](https://github.com/abe33/minimap-color-highlight/commit/911c6fff038664ae1ac1ed663c48834876a36cc0))
+
 <a name="0.3.2"></a>
 # 0.3.2 (2014-07-10)
 
