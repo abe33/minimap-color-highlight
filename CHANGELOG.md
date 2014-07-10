@@ -1,3 +1,10 @@
+<a name="0.3.2"></a>
+# 0.3.2 (2014-07-10)
+
+## :bug: Bug Fixes
+
+- Fix error when accessing model after closing a tab ([bb905dd6](https://github.com/abe33/minimap-color-highlight/commit/bb905dd6f864bdc64c5d4f0f79fb58f1f039a00b))
+
 <a name="v0.3.1"></a>
 # v0.3.1 (2014-07-07)
 
