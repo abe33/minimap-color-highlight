@@ -43,7 +43,7 @@ module.exports = ->
       @setModel(model)
 
       @removeMarkers()
-      @markersUpdated(model.markers)
+      @markersUpdated(model.markers) unless model?
 
     attach: ->
       minimapView = @getMinimap()
