@@ -1,3 +1,10 @@
+<a name="v0.3.4"></a>
+# v0.3.4 (2014-07-21)
+
+## :bug: Bug Fixes
+
+- Fix missing highlights when minimap is created after highlights view ([1d459167](https://github.com/abe33/minimap-color-highlight/commit/1d459167863c0e0c0ea42fe6d47b7cc1ee8cbfb0))
+
 <a name="v0.3.3"></a>
 # v0.3.3 (2014-07-10)
 
