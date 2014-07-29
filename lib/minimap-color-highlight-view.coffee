@@ -46,8 +46,9 @@ module.exports = ->
       @markersUpdated(model.markers) if model?
 
     attach: ->
-      @getMinimap().then (minimapView) =>
-        unless @minimapView?
+      @getMinimap()
+      .then (minimapView) =>
+        if not @minimapView? or @parent().length is 0
           minimapView.miniOverlayer.append(this)
           @minimapView = minimapView
           @adjustResults()
