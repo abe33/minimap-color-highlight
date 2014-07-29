@@ -1,3 +1,10 @@
+<a name="v0.3.6"></a>
+# v0.3.6 (2014-07-29)
+
+## :bug: Bug Fixes
+
+- Fix highlights not attached again on active item change ([8f3b3202](https://github.com/abe33/minimap-color-highlight/commit/8f3b3202bac77109cd93a970caf326a1f461b75a))
+
 <a name="v0.3.4"></a>
 # v0.3.4 (2014-07-21)
 
