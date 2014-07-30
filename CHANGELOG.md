@@ -1,3 +1,10 @@
+<a name="v0.3.7"></a>
+# v0.3.7 (2014-07-30)
+
+## :bug: Bug Fixes
+
+- Fix multiple view added to the minimap. ([ac329969](https://github.com/abe33/minimap-color-highlight/commit/ac329969927806de39e67ddfd6f0fc9543598eb2))
+
 <a name="v0.3.6"></a>
 # v0.3.6 (2014-07-29)
 
