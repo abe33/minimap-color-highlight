@@ -46,9 +46,11 @@ module.exports = ->
       @markersUpdated(model.markers) if model?
 
     attach: ->
+      @minimapView?.find('.atom-color-highlight').remove()
+      
       @getMinimap()
       .then (minimapView) =>
-        if not @minimapView? or @parent().length is 0
+        if not @minimapView? or @minimapView.find('.atom-color-highlight').length is 0
           minimapView.miniOverlayer.append(this)
           @minimapView = minimapView
           @adjustResults()
@@ -60,7 +62,7 @@ module.exports = ->
     # still returns different widths for chars, so during that time
     # I'll use fixed scale.
     adjustResults: ->
-      @css '-webkit-transform', "scale3d(#{minimap.getCharWidthRatio()},1,1)"
+      @css '-webkit-transform', "scale(#{minimap.getCharWidthRatio()},1)"
 
     getEditor: -> @paneView.activeView
     getMinimap: ->
