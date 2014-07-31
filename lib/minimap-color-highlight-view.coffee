@@ -98,6 +98,13 @@ module.exports = ->
 
     patchMarkers: ->
       for k,marker of @markerViews
+        unless marker.patched
+          getSize = marker.getSize
+          getSpacing = marker.getSpacing
+          marker.getSize = => getSize.call(marker) * @minimapView.scaleX
+          marker.getSpacing = => getSpacing.call(marker) * @minimapView.scaleX
+          marker.patched = true
+
         marker.intersectsRenderedScreenRows = (range) =>
           range.intersectsRowRange(@minimapView.miniEditorView.firstRenderedScreenRow, @minimapView.miniEditorView.lastRenderedScreenRow)
         marker.editorView = @minimapView
