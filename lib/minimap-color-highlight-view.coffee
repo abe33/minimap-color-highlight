@@ -93,6 +93,9 @@ module.exports = ->
     markersUpdated: (markers) ->
       super(markers)
       return unless @minimapView?
+      @patchMarkers()
+
+    patchMarkers: ->
       for k,marker of @markerViews
         marker.intersectsRenderedScreenRows = (range) =>
           range.intersectsRowRange(@minimapView.miniEditorView.firstRenderedScreenRow, @minimapView.miniEditorView.lastRenderedScreenRow)
