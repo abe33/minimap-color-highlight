@@ -47,13 +47,13 @@ module.exports = ->
 
     attach: ->
       @minimapView?.find('.atom-color-highlight').remove()
-      
+
       @getMinimap()
       .then (minimapView) =>
         if not @minimapView? or @minimapView.find('.atom-color-highlight').length is 0
           minimapView.miniOverlayer.append(this)
           @minimapView = minimapView
-          @adjustResults()
+          # @adjustResults()
 
     # As there's a slightly different char width between the minimap font
     # and the editor font we'll retrieve both widths and compute the
@@ -106,4 +106,6 @@ module.exports = ->
       for k,marker of @markerViews
         marker.intersectsRenderedScreenRows = (range) =>
           range.intersectsRowRange(@minimapView.miniEditorView.firstRenderedScreenRow, @minimapView.miniEditorView.lastRenderedScreenRow)
+        marker.editorView = @minimapView
+        marker.updateNeeded = true
         marker.updateDisplay()
