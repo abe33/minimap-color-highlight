@@ -53,16 +53,6 @@ module.exports = ->
         if not @minimapView? or @minimapView.find('.atom-color-highlight').length is 0
           minimapView.miniOverlayer.append(this)
           @minimapView = minimapView
-          # @adjustResults()
-
-    # As there's a slightly different char width between the minimap font
-    # and the editor font we'll retrieve both widths and compute the
-    # ratio to properly scale the find results.
-    # FIXME I can't wrap my head on why the fixed version of redacted
-    # still returns different widths for chars, so during that time
-    # I'll use fixed scale.
-    adjustResults: ->
-      @css '-webkit-transform', "scale(#{minimap.getCharWidthRatio()},1)"
 
     getEditor: -> @paneView.activeView
     getMinimap: ->
