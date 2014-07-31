@@ -53,6 +53,7 @@ module.exports = ->
         if not @minimapView? or @minimapView.find('.atom-color-highlight').length is 0
           minimapView.miniOverlayer.append(this)
           @minimapView = minimapView
+          @patchMarkers()
 
     getEditor: -> @paneView.activeView
     getMinimap: ->
