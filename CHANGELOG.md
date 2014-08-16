@@ -1,3 +1,17 @@
+<a name="v1.0.0"></a>
+# v1.0.0 (2014-08-16)
+
+## :sparkles: Features
+
+- Add patched methods for dot markers ([eb7d4d99](https://github.com/abe33/minimap-color-highlight/commit/eb7d4d99e691229f9437f303bcfc07f392e29616))
+- Implement support for the minimap char position API ([8801ba8c](https://github.com/abe33/minimap-color-highlight/commit/8801ba8c6e0cba722a5d2136c588e7bba52bc384))
+
+## :bug: Bug Fixes
+
+- Fix missing markers patching when attaching the view ([33b3229b](https://github.com/abe33/minimap-color-highlight/commit/33b3229b922279efa1b690a438447e2cd150c184))
+- Fix dot marker size and vertical placement ([48deff0c](https://github.com/abe33/minimap-color-highlight/commit/48deff0cd477faf8333a9f91ff5fa1a560f07c08))
+
+
 <a name="v0.3.7"></a>
 # v0.3.7 (2014-07-30)
 
