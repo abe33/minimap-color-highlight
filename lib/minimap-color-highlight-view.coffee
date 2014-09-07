@@ -19,7 +19,7 @@ module.exports = ->
     constructor: (@paneView) ->
       @decorationsByMarkerId = {}
 
-      @editorView = @getEditor()
+      @setEditorView(@getEditor())
       @model = colorHighlight.modelForEditorView(@editorView)
 
       @subscribe @model, 'updated', @markersUpdated
@@ -75,9 +75,22 @@ module.exports = ->
       @getMinimap()
       .then (minimap) =>
         for marker in @markers
+          continue if @markerHidden(marker)
           decoration = minimap.decorateMarker(marker, type: 'highlight', color: marker.bufferMarker.properties.cssColor)
           @decorationsByMarkerId[marker.id] = decoration
 
     rebuildDecorations: =>
       @destroyDecorations()
       @markersUpdated(@markers)
+
+    markerHidden: (marker) ->
+      @markerHiddenDueToComment(marker) or @markerHiddenDueToString(marker)
+    markerHiddenDueToComment: (marker) ->
+      bufferRange = marker.getBufferRange()
+      scope = @editor.displayBuffer.scopesForBufferPosition(bufferRange.start).join(';')
+      atom.config.get('atom-color-highlight.hideMarkersInComments') and scope.match(/comment/)?
+
+    markerHiddenDueToString: (marker) ->
+      bufferRange = marker.getBufferRange()
+      scope = @editor.displayBuffer.scopesForBufferPosition(bufferRange.start).join(';')
+      atom.config.get('atom-color-highlight.hideMarkersInStrings') and scope.match(/string/)?
