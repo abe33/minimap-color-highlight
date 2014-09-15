@@ -76,7 +76,6 @@ module.exports = ->
             decoration = minimap.decorateMarker(marker, type: 'highlight', color: marker.bufferMarker.properties.cssColor)
             @decorationsByMarkerId[marker.id] = decoration
 
-        console.log Object.keys(@decorationsByMarkerId)
         @markers = markers
 
         for id, decoration of decorationsToRemove
