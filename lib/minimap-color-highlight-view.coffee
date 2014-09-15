@@ -16,10 +16,10 @@ module.exports = ->
   class MinimapColorHighlighView
     Subscriber.includeInto(this)
 
-    constructor: (@paneView) ->
+    constructor: (@model, @editorView) ->
       @decorationsByMarkerId = {}
 
-      @setEditorView(@getEditor())
+      {@editor} = @editorView
       @model = colorHighlight.modelForEditorView(@editorView)
 
       @subscribe @model, 'updated', @markersUpdated
@@ -40,7 +40,6 @@ module.exports = ->
     destroyDecorations: ->
       decoration.destroy() for id,decoration of @decorationsByMarkerId
 
-    getEditor: -> @paneView.activeView
     getMinimap: ->
       defer = Q.defer()
       if @editorView?.hasClass('editor')
@@ -61,15 +60,7 @@ module.exports = ->
 
       defer.promise
 
-    setEditorView: (editorView) ->
-      return if typeof editorView is 'function'
-
-      @editorView = editorView
-      {@editor} = @editorView
-
     updateSelections: ->
-
-    activeTabSupportMinimap: -> @getEditor()
 
     markersUpdated: (@markers) =>
       @getMinimap()

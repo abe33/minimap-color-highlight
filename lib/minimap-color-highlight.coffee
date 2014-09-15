@@ -46,12 +46,13 @@ class MinimapColorHighlight
     return if @viewsCreated
 
     @viewsCreated = true
-    @paneSubscription = @colorHighlight.eachColorHighlightEditor (editor) =>
-      pane = editor.editorView.getPane()
+    @paneSubscription = @colorHighlight.eachColorHighlightEditor (color) =>
+      editor = color.editorView.getEditor()
+      pane = color.editorView.getPane()
       return unless pane?
-      view = new @MinimapColorHighlightView pane
+      view = new @MinimapColorHighlightView color.getActiveModel(), color.editorView
 
-      @views[pane.model.id] = view
+      @views[editor.id] = view
 
   destroyViews: =>
     return unless @viewsCreated
