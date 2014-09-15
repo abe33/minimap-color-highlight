@@ -1,5 +1,6 @@
-{Subscriber} = require 'emissary'
+_ = require 'underscore-plus'
 Q = require 'q'
+{Subscriber} = require 'emissary'
 
 # HACK The exports is a function here because we are not sure that the
 # `atom-color-highlight` and `minimap` packages will be available when this
@@ -62,13 +63,26 @@ module.exports = ->
 
     updateSelections: ->
 
-    markersUpdated: (@markers) =>
+    markersUpdated: (markers) =>
       @getMinimap()
       .then (minimap) =>
-        for marker in @markers
+        decorationsToRemove = _.clone(@decorationsByMarkerId)
+        for marker in markers
           continue if @markerHidden(marker)
-          decoration = minimap.decorateMarker(marker, type: 'highlight', color: marker.bufferMarker.properties.cssColor)
-          @decorationsByMarkerId[marker.id] = decoration
+
+          if @decorationsByMarkerId[marker.id]?
+            delete decorationsToRemove[marker.id]
+          else
+            decoration = minimap.decorateMarker(marker, type: 'highlight', color: marker.bufferMarker.properties.cssColor)
+            @decorationsByMarkerId[marker.id] = decoration
+
+        console.log Object.keys(@decorationsByMarkerId)
+        @markers = markers
+
+        for id, decoration of decorationsToRemove
+          decoration.destroy()
+          delete @decorationsByMarkerId[id]
+
 
     rebuildDecorations: =>
       @destroyDecorations()
