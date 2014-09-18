@@ -1,6 +1,5 @@
 _ = require 'underscore-plus'
 Q = require 'q'
-{Subscriber} = require 'emissary'
 
 # HACK The exports is a function here because we are not sure that the
 # `atom-color-highlight` and `minimap` packages will be available when this
@@ -15,7 +14,6 @@ module.exports = ->
   colorHighlight = require (colorHighlightPackage.path)
 
   class MinimapColorHighlighView
-    Subscriber.includeInto(this)
 
     constructor: (@model, @editorView) ->
       @decorationsByMarkerId = {}
@@ -23,11 +21,11 @@ module.exports = ->
       {@editor} = @editorView
       @model = colorHighlight.modelForEditorView(@editorView)
 
-      @subscribe @model, 'updated', @markersUpdated
+      @subscription = @model.on 'updated', @markersUpdated
       @markersUpdated(@model.markers) if @model?
 
     destroy: ->
-      @unsubscribe()
+      @subscription.off()
       @destroyDecorations()
       @minimapView?.find('.atom-color-highlight').remove()
 
