@@ -15,6 +15,8 @@ class MinimapColorHighlight
     @MinimapColorHighlightView = require('./minimap-color-highlight-view')()
 
     @minimap = require @minimapPackage.path
+    return @deactivate() unless @minimap.versionMatch('3.x')
+
     @colorHighlight = require @colorHighlightPackage.path
 
     @minimap.registerPlugin 'color-highlight', this
