@@ -1,3 +1,22 @@
+<a name="v3.0.0"></a>
+# v3.0.0 (2014-09-19)
+
+## :sparkles: Features
+
+- Add version test for minimap v3 ([99601c7a](https://github.com/abe33/minimap-color-highlight/commit/99601c7aef0305ebeb9ae1c21ca48afc665fe6a9))
+- Add proper handling of atom-color-highlight filter options ([5bd5e230](https://github.com/abe33/minimap-color-highlight/commit/5bd5e2303cb464ad4b5684e5a5dbb0961cc2e0aa))
+- Implement support for minimap decoration API ([c6435595](https://github.com/abe33/minimap-color-highlight/commit/c643559596fe335ba8c6740e8b6bb094c7356654))
+
+## :bug: Bug Fixes
+
+- Fix deprecated minimap methods calls ([833ea7d3](https://github.com/abe33/minimap-color-highlight/commit/833ea7d372b6542da31b36f32d7d66ff3e9ae816))
+- Fix deprecated methods call ([35f23e19](https://github.com/abe33/minimap-color-highlight/commit/35f23e1907ff502e5ef6534248dbef4bf4ee2364))
+- Fix broken activation/deactivation with more than one view ([7b6e48b5](https://github.com/abe33/minimap-color-highlight/commit/7b6e48b5c13d69ce29e7cf3616be8207c50149a6))
+
+## :racehorse: Performances
+
+- Avoid recreating all the decorations on markers update ([88dc039d](https://github.com/abe33/minimap-color-highlight/commit/88dc039dc813c32be4b35f33c319624f1a2ce1ee))
+
 <a name="v1.0.0"></a>
 # v1.0.0 (2014-08-16)
 
