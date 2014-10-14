@@ -1,3 +1,11 @@
+<a name="v3.0.1"></a>
+# v3.0.1 (2014-10-14)
+
+## :bug: Bug Fixes
+
+- Fix access to removed private method ([5c970609](https://github.com/abe33/minimap-color-highlight/commit/5c970609036d41713bf03d084a10494e206828f7))
+- Prevent an exception when trying to destroy an already destroyed view ([ed35276e](https://github.com/abe33/minimap-color-highlight/commit/ed35276e9ed86dd7afcd4d593d1940ee2bc3df6f))
+
 <a name="v3.0.0"></a>
 # v3.0.0 (2014-09-19)
 
