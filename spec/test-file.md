@@ -1,6 +1,6 @@
 ### SVG Colors (case insensitive)
 
-  * orangeRed
+  * orangered
   * YellowGreen
   * GOLD
 

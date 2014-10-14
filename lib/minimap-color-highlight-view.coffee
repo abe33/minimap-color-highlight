@@ -64,6 +64,7 @@ module.exports = ->
     markersUpdated: (markers) =>
       @getMinimap()
       .then (minimap) =>
+
         decorationsToRemove = _.clone(@decorationsByMarkerId)
         for marker in markers
           continue if @markerHidden(marker)
@@ -79,6 +80,8 @@ module.exports = ->
         for id, decoration of decorationsToRemove
           decoration.destroy()
           delete @decorationsByMarkerId[id]
+      .fail (reason) ->
+        console.log reason.stack
 
 
     rebuildDecorations: =>
@@ -87,12 +90,18 @@ module.exports = ->
 
     markerHidden: (marker) ->
       @markerHiddenDueToComment(marker) or @markerHiddenDueToString(marker)
+    getScope: (bufferRange) ->
+      if @editor.displayBuffer.scopesForBufferPosition?
+        @editor.displayBuffer.scopesForBufferPosition(bufferRange.start).join(';')
+      else
+        @editor.displayBuffer.scopeDescriptorForBufferPosition(bufferRange.start).join(';')
+
     markerHiddenDueToComment: (marker) ->
       bufferRange = marker.getBufferRange()
-      scope = @editor.displayBuffer.scopesForBufferPosition(bufferRange.start).join(';')
+      scope = @getScope(bufferRange)
       atom.config.get('atom-color-highlight.hideMarkersInComments') and scope.match(/comment/)?
 
     markerHiddenDueToString: (marker) ->
       bufferRange = marker.getBufferRange()
-      scope = @editor.displayBuffer.scopesForBufferPosition(bufferRange.start).join(';')
+      scope = @getScope(bufferRange)
       atom.config.get('atom-color-highlight.hideMarkersInStrings') and scope.match(/string/)?
