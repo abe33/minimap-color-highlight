@@ -59,7 +59,7 @@ class MinimapColorHighlight
       @views[editor.id] = view
 
       subscription = editor.getBuffer().onDidDestroy =>
-        @views[editor.id].destroy()
+        @views[editor.id]?.destroy()
         delete @views[editor.id]
         subscription.dispose()
 
