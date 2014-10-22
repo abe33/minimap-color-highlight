@@ -90,11 +90,16 @@ module.exports = ->
 
     markerHidden: (marker) ->
       @markerHiddenDueToComment(marker) or @markerHiddenDueToString(marker)
+
     getScope: (bufferRange) ->
       if @editor.displayBuffer.scopesForBufferPosition?
         @editor.displayBuffer.scopesForBufferPosition(bufferRange.start).join(';')
       else
-        @editor.displayBuffer.scopeDescriptorForBufferPosition(bufferRange.start).join(';')
+        descriptor = @editor.displayBuffer.scopeDescriptorForBufferPosition(bufferRange.start)
+        if descriptor.join?
+          descriptor.join(';')
+        else
+          descriptor.scopes.join(';')
 
     markerHiddenDueToComment: (marker) ->
       bufferRange = marker.getBufferRange()
