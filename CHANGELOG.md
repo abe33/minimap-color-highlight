@@ -1,3 +1,10 @@
+<a name="v3.0.2"></a>
+# v3.0.2 (2014-10-22)
+
+## :bug: Bug Fixes
+
+- Fix broken access to scope in latest Atom ([f0dbddfe](https://github.com/abe33/minimap-color-highlight/commit/f0dbddfe86502041a4263b2374fa7611406b8f6e))
+
 <a name="v3.0.1"></a>
 # v3.0.1 (2014-10-14)
 
