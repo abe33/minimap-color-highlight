@@ -6,13 +6,7 @@ Q = require 'q'
 # file is loaded. The binding instance will evaluate the module when
 # created because at that point we're sure that both modules have been
 # loaded.
-module.exports = ->
-  colorHighlightPackage = atom.packages.getLoadedPackage('atom-color-highlight')
-  minimapPackage = atom.packages.getLoadedPackage('minimap')
-
-  minimap = require (minimapPackage.path)
-  colorHighlight = require (colorHighlightPackage.path)
-
+module.exports = (minimap, colorHighlight) ->
   class MinimapColorHighlighView
 
     constructor: (@model, @editorView) ->

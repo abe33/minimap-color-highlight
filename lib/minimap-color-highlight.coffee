@@ -1,4 +1,5 @@
 {CompositeDisposable} = require 'event-kit'
+{requirePackages} = require 'atom-utils'
 
 class MinimapColorHighlight
 
@@ -7,19 +8,13 @@ class MinimapColorHighlight
     @subscriptions = new CompositeDisposable
 
   activate: (state) ->
-    @colorHighlightPackage = atom.packages.getLoadedPackage('atom-color-highlight')
-    @minimapPackage = atom.packages.getLoadedPackage('minimap')
+    requirePackages('minimap', 'atom-color-highlight')
+    .then ([@minimap, @colorHighlight]) =>
+      return @deactivate() unless @minimap.versionMatch('3.x')
 
-    return @deactivate() unless @colorHighlightPackage? and @minimapPackage?
+      @MinimapColorHighlightView = require('./minimap-color-highlight-view')(@minimap, @colorHighlight)
 
-    @MinimapColorHighlightView = require('./minimap-color-highlight-view')()
-
-    @minimap = require @minimapPackage.path
-    return @deactivate() unless @minimap.versionMatch('3.x')
-
-    @colorHighlight = require @colorHighlightPackage.path
-
-    @minimap.registerPlugin 'color-highlight', this
+      @minimap.registerPlugin 'color-highlight', this
 
   deactivate: ->
     @deactivatePlugin()
