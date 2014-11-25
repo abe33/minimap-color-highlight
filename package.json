@@ -1,8 +1,8 @@
 {
   "name": "minimap-color-highlight",
   "main": "./lib/minimap-color-highlight",
-  "version": "3.0.2",
-  "description": "A short description of your package",
+  "version": "3.0.3",
+  "description": "A minimap binding for the atom-color-highlight package.",
   "author": "Cédric Néhémie <cedric.nehemie@gmail.com>",
   "repository": "https://github.com/abe33/minimap-color-highlight",
   "license": "MIT",
