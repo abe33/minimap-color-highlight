@@ -9,21 +9,19 @@ Q = require 'q'
 module.exports = (minimap, colorHighlight) ->
   class MinimapColorHighlighView
 
-    constructor: (@model, @editorView) ->
+    constructor: (@model, @editor) ->
       @decorationsByMarkerId = {}
 
-      {@editor} = @editorView
-      @model = colorHighlight.modelForEditorView(@editorView)
-
-      @subscription = @model.on 'updated', @markersUpdated
+      @subscription = @model.onDidUpdateMarkers @markersUpdated
       @markersUpdated(@model.markers) if @model?
+      @observeConfig()
 
     destroy: ->
       @subscription.off()
       @destroyDecorations()
       @minimapView?.find('.atom-color-highlight').remove()
 
-     observeConfig: ->
+    observeConfig: ->
       atom.config.observe 'atom-color-highlight.hideMarkersInComments', @rebuildDecorations
       atom.config.observe 'atom-color-highlight.hideMarkersInStrings', @rebuildDecorations
       atom.config.observe 'atom-color-highlight.markersAtEndOfLine', @rebuildDecorations
@@ -35,21 +33,19 @@ module.exports = (minimap, colorHighlight) ->
 
     getMinimap: ->
       defer = Q.defer()
-      if @editorView?.hasClass('editor')
-        minimapView = minimap.minimapForEditorView(@editorView)
-        if minimapView?
-          defer.resolve(minimapView)
-        else
-          poll = =>
-            minimapView = minimap.minimapForEditorView(@editorView)
-            if minimapView?
-              defer.resolve(minimapView)
-            else
-              setTimeout(poll, 10)
+      minimapView = minimap.minimapForEditor(@editor)
 
-          setTimeout(poll, 10)
+      if minimapView?
+        defer.resolve(minimapView)
       else
-        defer.reject("#{@editorView} is not a legal editor")
+        poll = =>
+          minimapView = minimap.minimapForEditor(@editor)
+          if minimapView?
+            defer.resolve(minimapView)
+          else
+            setTimeout(poll, 10)
+
+        setTimeout(poll, 10)
 
       defer.promise
 
@@ -58,7 +54,6 @@ module.exports = (minimap, colorHighlight) ->
     markersUpdated: (markers) =>
       @getMinimap()
       .then (minimap) =>
-
         decorationsToRemove = _.clone(@decorationsByMarkerId)
         for marker in markers
           continue if @markerHidden(marker)
