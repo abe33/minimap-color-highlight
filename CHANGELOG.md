@@ -1,3 +1,10 @@
+<a name="v3.0.4"></a>
+# v3.0.4 (2015-01-03)
+
+## :bug: Bug Fixes
+
+- Fix binding for atom-color-highlight v3 ([6a6a309c](https://github.com/abe33/minimap-color-highlight/commit/6a6a309cac72b99474bc9ab27b471f86af03e4ad))
+
 <a name="v3.0.3"></a>
 # v3.0.3 (2014-10-22)
 
