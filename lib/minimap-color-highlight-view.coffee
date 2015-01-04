@@ -33,15 +33,15 @@ module.exports = (minimap, colorHighlight) ->
 
     getMinimap: ->
       defer = Q.defer()
-      minimapView = minimap.minimapForEditor(@editor)
+      minimapModel = minimap.minimapForEditor(@editor)
 
-      if minimapView?
-        defer.resolve(minimapView)
+      if minimapModel?
+        defer.resolve(minimapModel)
       else
         poll = =>
-          minimapView = minimap.minimapForEditor(@editor)
-          if minimapView?
-            defer.resolve(minimapView)
+          minimapModel = minimap.minimapForEditor(@editor)
+          if minimapModel?
+            defer.resolve(minimapModel)
           else
             setTimeout(poll, 10)
 

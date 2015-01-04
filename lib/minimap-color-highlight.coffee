@@ -10,7 +10,7 @@ class MinimapColorHighlight
   activate: (state) ->
     requirePackages('minimap', 'atom-color-highlight')
     .then ([@minimap, @colorHighlight]) =>
-      return @deactivate() unless @minimap.versionMatch('3.x')
+      return @deactivate() unless @minimap.versionMatch('>= 3.0.0')
 
       @MinimapColorHighlightView = require('./minimap-color-highlight-view')(@minimap, @colorHighlight)
 
@@ -19,7 +19,6 @@ class MinimapColorHighlight
   deactivate: ->
     @deactivatePlugin()
     @minimapPackage = null
-    @colorHighlightPackage = null
     @colorHighlight = null
     @minimap = null
 
@@ -29,7 +28,7 @@ class MinimapColorHighlight
 
     @active = true
 
-    @createViews() if @minimap.active
+    @createViews() #if @minimap.active
 
     @subscriptions.add @minimap.onDidActivate @createViews
     @subscriptions.add @minimap.onDidDeactivate @destroyViews
