@@ -28,7 +28,7 @@ class MinimapColorHighlight
 
     @active = true
 
-    @createViews() #if @minimap.active
+    @createViews()
 
     @subscriptions.add @minimap.onDidActivate @createViews
     @subscriptions.add @minimap.onDidDeactivate @destroyViews
