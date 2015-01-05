@@ -1,3 +1,10 @@
+<a name="v3.0.5"></a>
+# v3.0.5 (2015-01-05)
+
+## :bug: Bug Fixes
+
+- Fix broken refresh when markers array is null ([1fab6c41](https://github.com/abe33/minimap-color-highlight/commit/1fab6c41d204062a30dadacde0dbe309cc48a9b0))
+
 <a name="v3.0.4"></a>
 # v3.0.4 (2015-01-03)
 
