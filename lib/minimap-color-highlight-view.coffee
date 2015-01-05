@@ -52,6 +52,7 @@ module.exports = (minimap, colorHighlight) ->
     updateSelections: ->
 
     markersUpdated: (markers) =>
+      markers ||= []
       @getMinimap()
       .then (minimap) =>
         decorationsToRemove = _.clone(@decorationsByMarkerId)
