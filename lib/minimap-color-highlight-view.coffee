@@ -12,8 +12,8 @@ module.exports = (minimap, colorHighlight) ->
     constructor: (@model, @editor) ->
       @decorationsByMarkerId = {}
 
-      @subscription = @model.onDidUpdateMarkers @markersUpdated
-      @markersUpdated(@model.markers) if @model?
+      @subscription = @model.onDidUpdateMarkers @requestMarkersUpdate
+      @requestMarkersUpdate() if @model?
       @observeConfig()
 
     destroy: ->
@@ -33,15 +33,20 @@ module.exports = (minimap, colorHighlight) ->
 
     getMinimap: ->
       defer = Q.defer()
-      minimapModel = minimap.minimapForEditor(@editor)
 
-      if minimapModel?
-        defer.resolve(minimapModel)
+      if @minimapModel?
+        defer.resolve(@minimapModel)
+        return defer.promise
+
+      @minimapModel = minimap.minimapForEditor(@editor)
+
+      if @minimapModel?
+        defer.resolve(@minimapModel)
       else
         poll = =>
-          minimapModel = minimap.minimapForEditor(@editor)
-          if minimapModel?
-            defer.resolve(minimapModel)
+          @minimapModel = minimap.minimapForEditor(@editor)
+          if @minimapModel?
+            defer.resolve(@minimapModel)
           else
             setTimeout(poll, 10)
 
@@ -50,6 +55,17 @@ module.exports = (minimap, colorHighlight) ->
       defer.promise
 
     updateSelections: ->
+
+    requestMarkersUpdate: =>
+      return if @frameRequested
+
+      @frameRequested = true
+      requestAnimationFrame =>
+        @updateMarkers()
+        @frameRequested = false
+
+    updateMarkers: =>
+      @markersUpdated(@model.markers)
 
     markersUpdated: (markers) =>
       markers ||= []
@@ -72,7 +88,6 @@ module.exports = (minimap, colorHighlight) ->
           delete @decorationsByMarkerId[id]
       .fail (reason) ->
         console.log reason.stack
-
 
     rebuildDecorations: =>
       @destroyDecorations()
