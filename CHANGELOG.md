@@ -1,3 +1,11 @@
+<a name="v3.1.0"></a>
+# v3.1.0 (2015-01-05)
+
+## :sparkles: Features
+
+- Implement debounced decoration update ([7ac98258](https://github.com/abe33/minimap-color-highlight/commit/7ac982585c639ee055cce2c152f215d8868430b6))
+- Implement temporary support for both minimap v3 and v4 ([b4097808](https://github.com/abe33/minimap-color-highlight/commit/b4097808a38f7fc963ba564bf9c3136a34e655b6))
+
 <a name="v3.0.5"></a>
 # v3.0.5 (2015-01-05)
 
