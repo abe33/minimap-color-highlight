@@ -6,7 +6,7 @@ Q = require 'q'
 # file is loaded. The binding instance will evaluate the module when
 # created because at that point we're sure that both modules have been
 # loaded.
-module.exports = (minimap, colorHighlight) ->
+module.exports = (minimapPkg, colorHighlight) ->
   class MinimapColorHighlighView
 
     constructor: (@model, @editor) ->
@@ -31,28 +31,7 @@ module.exports = (minimap, colorHighlight) ->
     destroyDecorations: ->
       decoration.destroy() for id,decoration of @decorationsByMarkerId
 
-    getMinimap: ->
-      defer = Q.defer()
-
-      if @minimapModel?
-        defer.resolve(@minimapModel)
-        return defer.promise
-
-      @minimapModel = minimap.minimapForEditor(@editor)
-
-      if @minimapModel?
-        defer.resolve(@minimapModel)
-      else
-        poll = =>
-          @minimapModel = minimap.minimapForEditor(@editor)
-          if @minimapModel?
-            defer.resolve(@minimapModel)
-          else
-            setTimeout(poll, 10)
-
-        setTimeout(poll, 10)
-
-      defer.promise
+    getMinimap: -> minimapPkg.minimapForEditor(@editor)
 
     updateSelections: ->
 
@@ -69,25 +48,22 @@ module.exports = (minimap, colorHighlight) ->
 
     markersUpdated: (markers) =>
       markers ||= []
-      @getMinimap()
-      .then (minimap) =>
-        decorationsToRemove = _.clone(@decorationsByMarkerId)
-        for marker in markers
-          continue if @markerHidden(marker)
+      minimap = @getMinimap()
+      decorationsToRemove = _.clone(@decorationsByMarkerId)
+      for marker in markers
+        continue if @markerHidden(marker)
 
-          if @decorationsByMarkerId[marker.id]?
-            delete decorationsToRemove[marker.id]
-          else
-            decoration = minimap.decorateMarker(marker, type: 'highlight', color: marker.bufferMarker.properties.cssColor)
-            @decorationsByMarkerId[marker.id] = decoration
+        if @decorationsByMarkerId[marker.id]?
+          delete decorationsToRemove[marker.id]
+        else
+          decoration = minimap.decorateMarker(marker, type: 'highlight', color: marker.bufferMarker.properties.cssColor)
+          @decorationsByMarkerId[marker.id] = decoration
 
-        @markers = markers
+      @markers = markers
 
-        for id, decoration of decorationsToRemove
-          decoration.destroy()
-          delete @decorationsByMarkerId[id]
-      .fail (reason) ->
-        console.log reason.stack
+      for id, decoration of decorationsToRemove
+        decoration.destroy()
+        delete @decorationsByMarkerId[id]
 
     rebuildDecorations: =>
       @destroyDecorations()
