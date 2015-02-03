@@ -1,3 +1,12 @@
+<a name="v4.0.0"></a>
+# v4.0.0 (2015-02-03)
+
+This version introduce support for minimap v4 API exclusively.
+
+## :bug: Bug Fixes
+
+- Remove minimap polling ([2e494c2e](https://github.com/abe33/minimap-color-highlight/commit/2e494c2e06bc2c33ee036c3458ac2082caa5e343), [#3](https://github.com/abe33/minimap-color-highlight/issues/3))
+
 <a name="v3.1.0"></a>
 # v3.1.0 (2015-01-05)
 
