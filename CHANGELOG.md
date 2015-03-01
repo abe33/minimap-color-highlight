@@ -1,3 +1,10 @@
+<a name="v4.1.0"></a>
+# v4.1.0 (2015-03-01)
+
+## :sparkles: Features
+
+- Implement minimap service consumer ([034e8af5](https://github.com/abe33/minimap-color-highlight/commit/034e8af52cced91f0dd7d0af467ea66a70d81940))
+
 <a name="v4.0.0"></a>
 # v4.0.0 (2015-02-03)
 
