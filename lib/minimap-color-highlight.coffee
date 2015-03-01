@@ -8,10 +8,10 @@ class MinimapColorHighlight
     @subscriptions = new CompositeDisposable
 
   activate: (state) ->
-    requirePackages('minimap', 'atom-color-highlight')
-    .then ([@minimap, @colorHighlight]) =>
-      return @deactivate() unless @minimap.versionMatch('4.x')
 
+  consumeMinimapServiceV1: (@minimap) ->
+    requirePackages('atom-color-highlight')
+    .then ([@colorHighlight]) =>
       @MinimapColorHighlightView = require('./minimap-color-highlight-view')(@minimap, @colorHighlight)
 
       @minimap.registerPlugin 'color-highlight', this
