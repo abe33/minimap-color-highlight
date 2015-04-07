@@ -17,7 +17,7 @@ module.exports = (minimapPkg, colorHighlight) ->
       @observeConfig()
 
     destroy: ->
-      @subscription.off()
+      @subscription.dispose()
       @destroyDecorations()
       @minimapView?.find('.atom-color-highlight').remove()
 
