@@ -1,3 +1,11 @@
+<a name="v4.1.1"></a>
+# v4.1.1 (2015-05-02)
+
+## :bug: Bug Fixes
+
+- Store package style sheets in the styles/ directory instead of stylesheets/
+([b214a04](https://github.com/cpierce/minimap-color-highlight/commit/b214a040bfbaa130d0be0d176f0e2ffd5669a194)
+
 <a name="v4.1.0"></a>
 # v4.1.0 (2015-03-01)
 
