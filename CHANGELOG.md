@@ -1,3 +1,11 @@
+<a name="v4.1.1"></a>
+# v4.1.1 (2015-05-05)
+
+## :bug: Bug Fixes
+
+- Fix disposable deprecation ([336a6fa3](https://github.com/abe33/minimap-color-highlight/commit/336a6fa3046bbae3384736b316be84883629347a), [#5](https://github.com/abe33/minimap-color-highlight/issues/5))
+- Fix deprecations ([9e08888f](https://github.com/abe33/minimap-color-highlight/commit/9e08888f3cb83f9e4da356061556eaf163906f0e), [#7](https://github.com/abe33/minimap-color-highlight/issues/7))
+
 <a name="v4.1.0"></a>
 # v4.1.0 (2015-03-01)
 
