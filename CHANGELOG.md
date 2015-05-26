@@ -1,3 +1,10 @@
+<a name="v4.1.4"></a>
+# v4.1.4 (2015-05-27)
+
+## :bug: Bug Fixes
+
+- Fix deprecations ([50ffac11](https://github.com/abe33/minimap-color-highlight/commit/50ffac11ea21bfbfa7fb191acc9163d1e5cf4f92), [#11](https://github.com/abe33/minimap-color-highlight/issues/11))
+
 <a name="v4.1.2"></a>
 # v4.1.2 (2015-05-05)
 
