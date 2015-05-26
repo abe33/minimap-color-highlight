@@ -58,7 +58,7 @@ class MinimapColorHighlight
   destroyViews: =>
     return unless @viewsCreated
 
-    @paneSubscription.off()
+    @paneSubscription.dispose()
     @viewsCreated = false
     view.destroy() for id,view of @views
     @views = {}
